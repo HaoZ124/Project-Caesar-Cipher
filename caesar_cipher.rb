@@ -1,19 +1,24 @@
-def caesar_cipher(string, num)
-cipher = ''
-if num<0
-  num+=26
-end
-string.split('').each do |letter|
-  if letter.match(/[a-z]/i)
-    if letter.ord+num <= 90
-      cipher += (((letter.ord-65+num)%26)+65).chr
+def caesar_cipher(string, num = 0)
+    cipher = ""
+    if num<0
+        num += 26
+        
     end
-    if letter.ord+num >= 97
-      cipher += (((letter.ord-97+num)%26)+97).chr
+    string.each_char do |letter|
+        if letter.match(/[a-z]/i)
+            c = letter.ord
+            if c <= 90
+                cipher += ((c-65+num)%26+65).chr
+                
+            end
+            if c >= 97
+                cipher += ((c-97+num)%26+97).chr
+                
+            end
+        else
+            cipher += letter
+            
+        end
     end
-  else
-    cipher += letter
-  end
-end
-return cipher
+    return cipher
 end
